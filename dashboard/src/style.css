@@ -19,7 +19,7 @@ body, html, #root {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
   margin-top: 16px;
 }
@@ -35,3 +35,46 @@ body, html, #root {
   color: #8b949e;
   font-size: 12px;
 }
+
+.ok { color: #3fb950; font-weight: 700; }
+.down { color: #f85149; font-weight: 700; }
+
+.badge {
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.badge.running { background: #12321e; color: #3fb950; }
+.badge.idle { background: #2f2f2f; color: #c9d1d9; }
+.badge.warning { background: #332701; color: #e3b341; }
+.badge.fault { background: #3d1212; color: #ff7b72; }
+
+.alerts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.alerts li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.level {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+.level.warning { background: #332701; color: #e3b341; }
+.level.critical { background: #3d1212; color: #ff7b72; }

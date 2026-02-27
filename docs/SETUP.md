@@ -20,20 +20,19 @@ cd spacetimedb-module
 spacetime publish smart-factory
 ```
 
-## 3. 接通 edge reducer 调用
+## 3. Edge 运行模式（已打通）
 
-在 `edge-gateway/src/main.rs` 中替换 pseudo 代码为真实 SDK 调用：
+`edge-gateway` 现在支持两种模式：
 
-- 连接 endpoint
-- 调用 `sensor_update(machine_id, sensor_type, value, timestamp)`
+- 本地实时文件模式（默认）：每秒写 `dashboard/public/live.json`，不依赖 SpacetimeDB 服务。
+- Reducer 调用模式：设置 `SPACETIME_CALL_ENABLED=true` 后，额外执行 `spacetime call ... sensor_update`。
 
-## 4. 接通 dashboard 订阅
+## 4. Dashboard 实时接线（已打通）
 
-将 `dashboard/src/main.tsx` 中 mock 数据改为 SDK 实时订阅：
+`dashboard/src/main.tsx` 已替换 mock 数据：
 
-- 订阅 `machine`
-- 订阅 `alert`
-- 渲染状态卡片 + 告警滚动区
+- 每 1 秒轮询 `/live.json`
+- 渲染设备状态卡片 + 告警列表
 
 ## 5. Demo 验收标准
 

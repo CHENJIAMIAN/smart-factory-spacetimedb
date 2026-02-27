@@ -15,8 +15,8 @@
 2. 传感器时序表（SensorData）
 3. 告警表（Alert）
 4. `sensor_update` reducer：写入、聚合、阈值告警
-5. Edge 模拟器：每秒上报温度/振动
-6. Dashboard：展示设备状态卡片 + 告警列表
+5. Edge 模拟器：每秒上报温度/振动，并输出 `dashboard/public/live.json`
+6. Dashboard：1s 轮询 `live.json` 展示实时状态卡片 + 告警列表
 
 ## 本地启动计划
 
@@ -43,20 +43,28 @@ cd spacetimedb-module
 spacetime publish smart-factory
 ```
 
-### 4) 启动边缘采集器（通过 spacetime CLI 调 reducer）
+### 4) 启动边缘采集器（默认本地实时文件模式）
 
 ```bash
 cd ../edge-gateway
 set -a; source ../.env; set +a
+# 默认 SPACETIME_CALL_ENABLED=false，仅写 dashboard/public/live.json
 cargo run
 ```
 
-### 5) 启动大屏
+### 5) 启动大屏（实时读取 live.json）
 
 ```bash
 cd ../dashboard
 pnpm install
 pnpm dev
+```
+
+### 6) 一键启动（推荐）
+
+```bash
+cd ..
+./scripts/start_demo.sh
 ```
 
 ## 下一步（第二阶段）
