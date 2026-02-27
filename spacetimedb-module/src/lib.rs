@@ -1,6 +1,6 @@
 use spacetimedb::{reducer, table, ReducerContext, Table};
 
-#[table(name = machine, public)]
+#[table(accessor = machine, public)]
 pub struct Machine {
     #[primary_key]
     pub id: u32,
@@ -10,7 +10,7 @@ pub struct Machine {
     pub last_updated: u64,
 }
 
-#[table(name = sensor_data, public)]
+#[table(accessor = sensor_data, public)]
 pub struct SensorData {
     #[auto_inc]
     #[primary_key]
@@ -21,7 +21,7 @@ pub struct SensorData {
     pub timestamp: u64,
 }
 
-#[table(name = alert, public)]
+#[table(accessor = alert, public)]
 pub struct Alert {
     #[auto_inc]
     #[primary_key]

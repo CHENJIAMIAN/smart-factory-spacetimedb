@@ -20,7 +20,7 @@
 
 ## 本地启动计划
 
-> 注意：SpacetimeDB API 迭代较快。以当前官方 CLI/SDK 为准，若编译报错，按 `docs/SETUP.md` 的“对齐步骤”处理。
+> 注意：SpacetimeDB API 迭代快。若命令差异，按 `docs/SETUP.md` 对齐。
 
 ### 1) 安装工具
 
@@ -29,22 +29,29 @@ cargo install spacetimedb-cli
 spacetime login
 ```
 
-### 2) 初始化并发布模块
+### 2) 配置环境变量
+
+```bash
+cp .env.example .env
+# 按需修改 SPACETIME_URI / SPACETIME_MODULE / MACHINE_ID
+```
+
+### 3) 发布模块
 
 ```bash
 cd spacetimedb-module
-# 视本机 CLI 版本确认 init 命令参数
 spacetime publish smart-factory
 ```
 
-### 3) 启动边缘采集器
+### 4) 启动边缘采集器（通过 spacetime CLI 调 reducer）
 
 ```bash
 cd ../edge-gateway
+set -a; source ../.env; set +a
 cargo run
 ```
 
-### 4) 启动大屏
+### 5) 启动大屏
 
 ```bash
 cd ../dashboard

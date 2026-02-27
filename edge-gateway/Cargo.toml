@@ -7,5 +7,3 @@ edition = "2021"
 anyhow = "1"
 rand = "0.8"
 tokio = { version = "1", features = ["full"] }
-# 替换为当前 SpacetimeDB Rust client 包名/版本
-spacetimedb-sdk = "*"
