@@ -36,6 +36,8 @@ const fallback: LivePayload = {
   alerts: [],
 };
 
+const API_BASE = (import.meta.env.VITE_API_BASE as string | undefined)?.replace(/\/$/, '') || '';
+
 function App() {
   const [data, setData] = useState<LivePayload>(fallback);
   const [online, setOnline] = useState(false);
@@ -45,7 +47,8 @@ function App() {
 
     const load = async () => {
       try {
-        const res = await fetch(`/live.json?t=${Date.now()}`, { cache: 'no-store' });
+        const url = API_BASE ? `${API_BASE}/api/live?t=${Date.now()}` : `/live.json?t=${Date.now()}`;
+        const res = await fetch(url, { cache: 'no-store' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = (await res.json()) as LivePayload;
         if (alive) {
@@ -72,6 +75,7 @@ function App() {
       <h1>Smart Factory Digital Twin</h1>
       <p className="sub">
         Realtime MVP Dashboard · <span className={online ? 'ok' : 'down'}>{online ? 'LIVE' : 'OFFLINE'}</span>
+        {API_BASE ? ` · backend: ${API_BASE}` : ' · backend: local live.json'}
       </p>
 
       <div className="grid">

@@ -67,6 +67,19 @@ cd ..
 ./scripts/start_demo.sh
 ```
 
+## GitHub Pages + Render 后端联动
+
+当前 dashboard 已支持通过 `VITE_API_BASE` 读取实时后端：
+
+- 生产默认：`https://smart-factory-api.onrender.com/api/live`
+- 本地默认：`/live.json`
+
+Render 使用仓库根目录的 `render.yaml` 一键创建服务：
+
+- service name: `smart-factory-api`
+- health: `/health`
+- data endpoint: `/api/live`
+
 ## 下一步（第二阶段）
 
 - OEE 拆分为 Availability / Performance / Quality 三因子
